@@ -14,7 +14,7 @@ echo "Sum is ::${sum}"
 
 #index Concept
 
-LEADERS=("modi","putin","trump","trudo")
+LEADERS=("modi" "putin" "trump" "trudo")
 
 echo "ALL LEADERS: ${LEADERS[@]}"
 echo "First leader: ${LEADERS[0]}"
