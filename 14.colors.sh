@@ -23,3 +23,6 @@ dnf list installed mysql
 if [ $? -ne 0]
     dnf insatll mysql
     validate $? "Mysql"
+else 
+    echo "Already Installed....$Y Mysql$N "
+fi
