@@ -6,7 +6,7 @@ Y="\e[33m"
 N="\e[0m"
 
 
-USERID(id -u)
+USERID=$(id -u)
 
 if [ $USERID -ne 0]; then
     echo -e "ERROR:: Please use this script in $R Root privelage$N"
