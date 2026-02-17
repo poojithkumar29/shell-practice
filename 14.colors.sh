@@ -8,7 +8,7 @@ N="\e[0m"
 
 USERID=$(id -u)
 
-if [ $USERID -ne 0]; then
+if [ $USERID -ne 0 ]; then
     echo -e "ERROR:: Please use this script in $R Root privelage$N"
     exit 1
 fi
@@ -21,9 +21,9 @@ fi
    }
 
 dnf list installed mysql
-if [ $? -ne 0]
+if [ $? -ne 0 ]; then
     dnf insatll mysql
-     validate $? "Mysql"
+    validate $? "Mysql"
 else 
      echo -e "Already Installed....$Y Mysql$N "
 fi
