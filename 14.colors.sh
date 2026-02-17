@@ -25,5 +25,5 @@ if [ $? -ne 0]
     dnf insatll mysql
      validate $? "Mysql"
 else 
-     echo "Already Installed....$Y Mysql$N "
+     echo -e "Already Installed....$Y Mysql$N "
 fi
