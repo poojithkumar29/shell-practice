@@ -8,7 +8,7 @@ LOG_FILE="$LOGS_FOLDER/$Script_name.log"
 mkdir -p $LOGS_FOLDER
     echo "Script are started executed at: $(date)" | tee -a $LOG_FILE
 
-if [$USERID -ne 0]; then 
+if [ $USERID -ne 0 ]; then 
  echo "ERROR::please run this script in ROOT privelege"
  exit1
 fi
