@@ -9,7 +9,7 @@ Y="\e[33m"
 N="\e[0m"
 
 LOGS_FOLDER="/var/log/shell-script"
-Script_name= $( echo $0 | cut -d "." -f1 )
+Script_name= $(echo $0 | cut -d "." -f1 )
 LOG_FILE="$LOGS_FOLDER/$Script_name.log"
 
 mkdir -p $LOGS_FOLDER
