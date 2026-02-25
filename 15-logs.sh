@@ -1,37 +1,37 @@
 #!/bin/bash
 
 USERID=$(id -u)
-
-
 R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
 LOGS_FOLDER="/var/log/shell-script"
-Script_name= $( echo $0 | cut -d "." -f1 )
-LOG_FILE="$LOGS_FOLDER/$Script_name.log"
+SCRIPT_NAME=$( echo $0 | cut -d "." -f1 )
+LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # /var/log/shell-script/16-logs.log
 
 mkdir -p $LOGS_FOLDER
-echo "Script executed time :: $(date)"
+echo "Script started executed at: $(date)" | tee -a $LOG_FILE
 
 if [ $USERID -ne 0 ]; then
-   echo "ERROR:: Please enter the scripts in ROOT privelage"
-   exit 1
+    echo "ERROR:: Please run this script with root privelege"
+    exit 1 # failure is other than 0
 fi
 
-validate()
-if [ $1 -ne 0 ]; then
-    echo "Installation.............Failure"
-else
-    echo "INstallation.............Sucessfull"
-    exit 1
-fi
+VALIDATE(){ # functions receive inputs through args just like shell script args
+    if [ $1 -ne 0 ]; then
+        echo -e "Installing $2 ... $R FAILURE $N" | tee -a $LOG_FILE
+        exit 1
+    else
+        echo -e "Installing $2 ... $G SUCCESS $N" | tee -a $LOG_FILE
+    fi
+}
 
-dnf list installed mysql
+dnf list installed mysql &>>$LOG_FILE
+# Install if it is not found
 if [ $? -ne 0 ]; then
-  dnf install mysql-server -y
-  validate $? "MYSQL"
-else 
-    echo "Already MYSQL is exsist.........skipping"
+    dnf install mysql -y &>>$LOG_FILE
+    VALIDATE $? "MySQL"
+else
+    echo -e "MySQL already exist ... $Y SKIPPING $N" | tee -a $LOG_FILE
 fi
